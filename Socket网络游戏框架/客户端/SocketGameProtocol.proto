@@ -1,0 +1,120 @@
+syntax = "proto3";
+package SocketGameProtocol;
+
+//消息类型(哪一个处理类处理)
+enum RequestCode
+{
+	RequestNone=0;
+	//用户
+	User=1;
+	//心跳消息
+	Heart=2;
+	//房间操作
+	Room=3;
+	//游戏操作
+	Game=4;
+}
+
+//处理消息的方法名(处理类要执行的方法)
+enum ActionCode
+{
+	ActionNone=0;
+	//注册
+	Register=1;
+	//登录
+	Login=2;
+	//创建新房间
+	CreateRoom=3;
+	//查找所有房间
+	FindAllRoom=4;
+	//查找某个房间
+	FindRoom=5;
+	//删除某个房间
+	DeleteRoom=6;
+	//加入某个房间
+	AddRoom=7;
+	//退出某个房间
+	ExitRoom=8;
+	//开始游戏
+	BeginGame=9;
+	//输入
+	PlayerInput=10;
+}
+
+//返回信号
+enum ReturnCode
+{
+	ReturnNode=0;
+	//成功
+	Succeed=1;
+	//失败
+	Fail=2;
+}
+
+//主包
+message MainPack
+{
+	//消息类型(哪一个处理类处理)
+	RequestCode requestCode=1;
+	//处理消息的方法名(处理类要执行的方法)
+	ActionCode actionCode=2;
+	//返回信号
+	ReturnCode returnCode=3;
+	//登录包
+	LoginPack loginPack=4;
+	//房间包
+	repeated RoomPack roomPackList=5;
+	//玩家包
+	map<string,PlayerPack> playerDic=6;
+}
+
+//登录包
+message LoginPack
+{
+	//用户名
+	string userName=1;
+	//密码
+	string password=2;
+}
+
+//房间包
+message RoomPack
+{
+	//房间目前的人数
+	uint32 nowManNum=1;
+	//房间总人数
+	uint32 maxManNum=2;
+	//房间的名字
+	string roomName=3;
+	//房间内的用户
+	map<string,UserPack> userDic=4;
+}
+
+//用户包
+message UserPack
+{
+    //房间的用户名
+    string userName=1;
+} 
+
+//玩家包
+message PlayerPack
+{
+	//玩家的名字
+	string playerName=1;
+	//玩家的输入包
+	InputPack inputPack=2;
+}
+
+//玩家的输入包
+message InputPack
+{
+    //获取键盘ad
+	float inputX=1;
+	//获取键盘ws
+    float inputY=2;
+    // 获取鼠标水平移动
+    float mouseX=3;
+    //获取鼠标叔侄移动
+    float mouseY=4;
+}

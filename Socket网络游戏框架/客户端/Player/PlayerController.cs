@@ -1,0 +1,101 @@
+﻿using SocketGameProtocol;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour,INetPlayer
+{
+    [Header("人物移动速度")]
+    public float moveSpeed = 3f;
+
+    [Header("人物旋转速度")]
+    public float rotationSpeed = 2.0f;
+
+    private Animator animator;
+
+    private InputRequest inputRequest;
+
+    private void Awake()
+    {
+        gameObject.name = GameMgr.Instance.localName;
+        inputRequest = new InputRequest(gameObject.name, 0, 0, 0);
+    }
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        
+    }
+
+    //获取键盘ad
+    private float inputX;
+    //获取键盘ws
+    private float inputY;
+    // 获取鼠标水平移动
+    private float mouseX;
+
+    //是否奔跑
+    private bool isRun;
+
+
+    private void Update()
+    {
+        SendInput();
+        MoveAndRotate();
+    }
+
+    private void MoveAndRotate()
+    {
+        // 在Y轴上旋转
+        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
+
+        if (inputX != 0 || inputY != 0)
+        {
+            if (isRun == false)
+            {
+                animator.SetBool("isRun", true);
+                isRun = true;
+            }
+        }
+        else if (isRun == true)
+        {
+            animator.SetBool("isRun", false);
+            isRun = false;
+        }
+
+        if (isRun == true)
+        {
+            animator.SetFloat("inputX", inputX);
+            animator.SetFloat("inputY", inputY);
+            transform.Translate((Vector3.forward * inputY + Vector3.right * inputX) * moveSpeed * Time.deltaTime);
+        }
+    }
+
+    /// <summary>
+    /// 发送玩家的输入
+    /// </summary>
+    private void SendInput()
+    {
+        inputRequest.inputX = Input.GetAxis("Horizontal");
+        inputRequest.inputY = Input.GetAxis("Vertical");
+        inputRequest.mouseX = Input.GetAxis("Mouse X");
+
+        if(inputRequest.inputX!=inputX||
+            inputRequest.inputY!=inputY||
+            inputRequest.mouseX!=mouseX)
+        {
+             ClientMgr.Instance.SendRequest(inputRequest);
+        }
+    }
+
+    /// <summary>
+    /// 处理远端键盘输入
+    /// </summary>
+    /// <param name="inputPack"></param>
+    public void HandleInput(InputPack inputPack)
+    {
+        inputX = inputPack.InputX;
+        inputY = inputPack.InputY;
+        mouseX = inputPack.MouseX;
+    }
+}
