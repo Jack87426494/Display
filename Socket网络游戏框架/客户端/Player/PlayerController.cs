@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour,INetPlayer
 
     private void Awake()
     {
-        gameObject.name = GameMgr.Instance.localName;
         inputRequest = new InputRequest(gameObject.name, 0, 0, 0);
     }
 
@@ -41,13 +40,11 @@ public class PlayerController : MonoBehaviour,INetPlayer
     private void Update()
     {
         SendInput();
-        MoveAndRotate();
+        Move();
     }
 
-    private void MoveAndRotate()
+    private void Move()
     {
-        // 在Y轴上旋转
-        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
 
         if (inputX != 0 || inputY != 0)
         {
@@ -97,5 +94,8 @@ public class PlayerController : MonoBehaviour,INetPlayer
         inputX = inputPack.InputX;
         inputY = inputPack.InputY;
         mouseX = inputPack.MouseX;
+
+        // 在Y轴上旋转
+        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
     }
 }

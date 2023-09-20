@@ -23,6 +23,15 @@ namespace Server.MessageHander
         public MainPack PlayerInput(Server server, Client client, MainPack pack)
         {
             pack.ReturnCode = ReturnCode.Succeed;
+            //开始广播
+            foreach (Client userClient in server.roomDic[pack.RoomPackList[0].RoomName].GetPlayers.Values)
+            {
+                if (userClient == client)
+                {
+                    continue;
+                }
+                userClient.Send(pack);
+            }
             return pack;
             //if (pack.PlayerDic.ContainsKey(client.GetUserData.userName))
             //{

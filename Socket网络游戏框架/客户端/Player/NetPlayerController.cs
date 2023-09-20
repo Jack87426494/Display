@@ -16,7 +16,7 @@ public class NetPlayerController : MonoBehaviour, INetPlayer
 
     private void Awake()
     {
-        gameObject.name = GameMgr.Instance.localName;
+        
     }
 
     private void Start()
@@ -36,14 +36,11 @@ public class NetPlayerController : MonoBehaviour, INetPlayer
 
     private void Update()
     {
-        MoveAndRotate();
+        Move();
     }
 
-    private void MoveAndRotate()
+    private void Move()
     {
-        // 在Y轴上旋转
-        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
-
         if (inputX != 0 || inputY != 0)
         {
             if (isRun == false)
@@ -75,5 +72,10 @@ public class NetPlayerController : MonoBehaviour, INetPlayer
         inputX = inputPack.InputX;
         inputY = inputPack.InputY;
         mouseX = inputPack.MouseX;
+
+
+        // 在Y轴上旋转
+        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
+       
     }
 }

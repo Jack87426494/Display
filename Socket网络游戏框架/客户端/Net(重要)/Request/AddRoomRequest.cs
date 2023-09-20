@@ -36,7 +36,8 @@ public class AddRoomRequest : BaseRequest
         {
             case ReturnCode.Succeed:
                 Debug.Log("加入房间成功");
-                if(UIMgr.Instance.GetPanel<RoomInPanel>()!=null)
+                GameMgr.Instance.roomName = pack.RoomPackList[0].RoomName;
+                if (UIMgr.Instance.GetPanel<RoomInPanel>()!=null)
                 {
                     UIMgr.Instance.GetPanel<RoomInPanel>().CreatUser(pack);
                     

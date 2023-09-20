@@ -31,14 +31,26 @@ public class RequestHandle
     /// </summary>
     private void RequestUpdate()
     {
-        if(callBackActionList.Count>0)
+        try
         {
-            foreach(Action action in callBackActionList)
+            lock (callBackActionList)
             {
-                action.Invoke();
+                if (callBackActionList.Count > 0)
+                {
+                    foreach (Action action in callBackActionList)
+                    {
+                        action?.Invoke();
+                    }
+                    callBackActionList.Clear();
+                }
             }
-            callBackActionList.Clear();
         }
+        catch
+        {
+
+        }
+       
+        
     }
 
     /// <summary>

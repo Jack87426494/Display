@@ -42,17 +42,24 @@ public class InputRequest : BaseRequest
 
         playerPack.InputPack = inputPack;
         pack.PlayerDic.Add(playerPack.PlayerName,playerPack);
+
+        //设置房间名
+        RoomPack roomPack = new RoomPack();
+        roomPack.RoomName = GameMgr.Instance.roomName;
+        pack.RoomPackList.Add(roomPack);
+
         return pack;
     }
 
     public override void OnResponse(MainPack pack)
     {
         base.OnResponse(pack);
-        switch(pack.ReturnCode)
+
+        switch (pack.ReturnCode)
         {
             case ReturnCode.Succeed:
-                Debug.Log("input同步成功");
-
+                //Debug.Log("input同步成功");
+                
                 break;
             case ReturnCode.Fail:
                 Debug.Log("input同步失败");
