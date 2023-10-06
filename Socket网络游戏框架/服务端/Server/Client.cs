@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Google.Protobuf;
+using MySql.Data.MySqlClient;
 using Server.Data;
 using SocketGameProtocol;
 using System;
@@ -113,11 +114,11 @@ namespace Server
                 
                 clientSocket.BeginReceive(message.Buffer, message.WaitReadLength, message.Remsize, SocketFlags.None, EndAsyncCallback, null);
             }
-            catch
+            catch (Exception e)
             {
-                
+                Console.WriteLine("接受消息出错:" + e.Message);
             }
-            
+
         }
 
         private void EndAsyncCallback(IAsyncResult ar)
@@ -133,13 +134,13 @@ namespace Server
                 message.ReadBuffer(len, HandleMsg);
 
                 // 检测心跳消息
-                CheckHeartMsg();
+                //CheckHeartMsg();
 
                 StartReceiveMessage();
             }
-            catch
+            catch (Exception e)
             {
-               
+                Console.WriteLine("tcp接受消息出错：" + e.Message);
             }
         }
 
@@ -189,11 +190,29 @@ namespace Server
                     clientSocket.Send(Message.PackData(pack));
                 }
             }
-            catch
+            catch(Exception e)
             {
-
+                Console.WriteLine("发送消息失败:"+e.Message);
             }
-         
+        }
+
+        public void SendPackData(MainPack pack)
+        {
+            if (isClose)
+            {
+                return;
+            }
+            try
+            {
+                if (clientSocket.Connected)
+                {
+                    clientSocket.Send(pack.ToByteArray());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("发送消息失败:" + e.Message);
+            }
         }
         
         /// <summary>

@@ -10,4 +10,16 @@ public interface INetPlayer : INetObj
     /// </summary>
     /// <param name="inputPack"></param>
     public void HandleInput(InputPack inputPack);
+
+    /// <summary>
+    /// 处理开火
+    /// </summary>
+    /// <param name="inputPack"></param>
+    public void HandleFire(InputPack inputPack);
+
+    /// <summary>
+    /// 处理受伤
+    /// </summary>
+    /// <param name="hitPack"></param>
+    public void HandleHit(HitPack hitPack);
 }

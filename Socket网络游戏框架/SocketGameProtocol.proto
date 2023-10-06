@@ -39,6 +39,10 @@ enum ActionCode
 	BeginGame=9;
 	//输入
 	PlayerInput=10;
+	//开火
+	Fire=11;
+	//受伤
+	Hit=12;
 }
 
 //返回信号
@@ -66,6 +70,8 @@ message MainPack
 	repeated RoomPack roomPackList=5;
 	//玩家包
 	map<string,PlayerPack> playerDic=6;
+	//初始化位置包
+	repeated TransformPack oriTransformPack=7;
 }
 
 //登录包
@@ -104,6 +110,16 @@ message PlayerPack
 	string playerName=1;
 	//玩家的输入包
 	InputPack inputPack=2;
+	//玩家的Transform信息包
+	TransformPack transformPack=3;
+	//伤害包
+	HitPack hitPack=4;
+}
+
+//伤害包
+message HitPack
+{
+	float damage=1;
 }
 
 //玩家的输入包
@@ -117,4 +133,21 @@ message InputPack
     float mouseX=3;
     //获取鼠标叔侄移动
     float mouseY=4;
+    //旋转量
+	float rotateAngleY=5;
+	//是否开火
+	bool isFire=6;
+}
+
+//玩家的Transform信息包
+message TransformPack
+{
+	//position x
+	float x=1;
+	//position y
+	float y=2;
+	//position z
+	float z=3;
+	//旋转量
+	float rotateAngleY=4;
 }

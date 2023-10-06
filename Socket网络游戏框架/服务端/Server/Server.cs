@@ -19,6 +19,9 @@ namespace Server
 
         private UdpServer udpServer;
 
+        //房间字典
+        public Dictionary<string, RoomData> roomDic = new Dictionary<string, RoomData>();
+
         //客户端列表
         public List<Client> clientList=new List<Client>();
 
@@ -52,7 +55,6 @@ namespace Server
                 Accept();
             }
         }
-
 
         private void Send(Socket clientSocket)
         {

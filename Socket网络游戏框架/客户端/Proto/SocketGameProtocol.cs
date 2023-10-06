@@ -25,42 +25,51 @@ namespace SocketGameProtocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChhTb2NrZXRHYW1lUHJvdG9jb2wucHJvdG8SElNvY2tldEdhbWVQcm90b2Nv",
-            "bCKgAwoITWFpblBhY2sSNAoLcmVxdWVzdENvZGUYASABKA4yHy5Tb2NrZXRH",
+            "bCLdAwoITWFpblBhY2sSNAoLcmVxdWVzdENvZGUYASABKA4yHy5Tb2NrZXRH",
             "YW1lUHJvdG9jb2wuUmVxdWVzdENvZGUSMgoKYWN0aW9uQ29kZRgCIAEoDjIe",
             "LlNvY2tldEdhbWVQcm90b2NvbC5BY3Rpb25Db2RlEjIKCnJldHVybkNvZGUY",
             "AyABKA4yHi5Tb2NrZXRHYW1lUHJvdG9jb2wuUmV0dXJuQ29kZRIwCglsb2dp",
             "blBhY2sYBCABKAsyHS5Tb2NrZXRHYW1lUHJvdG9jb2wuTG9naW5QYWNrEjIK",
             "DHJvb21QYWNrTGlzdBgFIAMoCzIcLlNvY2tldEdhbWVQcm90b2NvbC5Sb29t",
             "UGFjaxI+CglwbGF5ZXJEaWMYBiADKAsyKy5Tb2NrZXRHYW1lUHJvdG9jb2wu",
-            "TWFpblBhY2suUGxheWVyRGljRW50cnkaUAoOUGxheWVyRGljRW50cnkSCwoD",
-            "a2V5GAEgASgJEi0KBXZhbHVlGAIgASgLMh4uU29ja2V0R2FtZVByb3RvY29s",
-            "LlBsYXllclBhY2s6AjgBIi8KCUxvZ2luUGFjaxIQCgh1c2VyTmFtZRgBIAEo",
-            "CRIQCghwYXNzd29yZBgCIAEoCSLMAQoIUm9vbVBhY2sSEQoJbm93TWFuTnVt",
-            "GAEgASgNEhEKCW1heE1hbk51bRgCIAEoDRIQCghyb29tTmFtZRgDIAEoCRI6",
-            "Cgd1c2VyRGljGAQgAygLMikuU29ja2V0R2FtZVByb3RvY29sLlJvb21QYWNr",
-            "LlVzZXJEaWNFbnRyeRpMCgxVc2VyRGljRW50cnkSCwoDa2V5GAEgASgJEisK",
-            "BXZhbHVlGAIgASgLMhwuU29ja2V0R2FtZVByb3RvY29sLlVzZXJQYWNrOgI4",
-            "ASIcCghVc2VyUGFjaxIQCgh1c2VyTmFtZRgBIAEoCSJSCgpQbGF5ZXJQYWNr",
-            "EhIKCnBsYXllck5hbWUYASABKAkSMAoJaW5wdXRQYWNrGAIgASgLMh0uU29j",
-            "a2V0R2FtZVByb3RvY29sLklucHV0UGFjayJLCglJbnB1dFBhY2sSDgoGaW5w",
-            "dXRYGAEgASgCEg4KBmlucHV0WRgCIAEoAhIOCgZtb3VzZVgYAyABKAISDgoG",
-            "bW91c2VZGAQgASgCKkcKC1JlcXVlc3RDb2RlEg8KC1JlcXVlc3ROb25lEAAS",
-            "CAoEVXNlchABEgkKBUhlYXJ0EAISCAoEUm9vbRADEggKBEdhbWUQBCqvAQoK",
-            "QWN0aW9uQ29kZRIOCgpBY3Rpb25Ob25lEAASDAoIUmVnaXN0ZXIQARIJCgVM",
-            "b2dpbhACEg4KCkNyZWF0ZVJvb20QAxIPCgtGaW5kQWxsUm9vbRAEEgwKCEZp",
-            "bmRSb29tEAUSDgoKRGVsZXRlUm9vbRAGEgsKB0FkZFJvb20QBxIMCghFeGl0",
-            "Um9vbRAIEg0KCUJlZ2luR2FtZRAJEg8KC1BsYXllcklucHV0EAoqMwoKUmV0",
-            "dXJuQ29kZRIOCgpSZXR1cm5Ob2RlEAASCwoHU3VjY2VlZBABEggKBEZhaWwQ",
-            "AmIGcHJvdG8z"));
+            "TWFpblBhY2suUGxheWVyRGljRW50cnkSOwoQb3JpVHJhbnNmb3JtUGFjaxgH",
+            "IAMoCzIhLlNvY2tldEdhbWVQcm90b2NvbC5UcmFuc2Zvcm1QYWNrGlAKDlBs",
+            "YXllckRpY0VudHJ5EgsKA2tleRgBIAEoCRItCgV2YWx1ZRgCIAEoCzIeLlNv",
+            "Y2tldEdhbWVQcm90b2NvbC5QbGF5ZXJQYWNrOgI4ASIvCglMb2dpblBhY2sS",
+            "EAoIdXNlck5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkizAEKCFJvb21Q",
+            "YWNrEhEKCW5vd01hbk51bRgBIAEoDRIRCgltYXhNYW5OdW0YAiABKA0SEAoI",
+            "cm9vbU5hbWUYAyABKAkSOgoHdXNlckRpYxgEIAMoCzIpLlNvY2tldEdhbWVQ",
+            "cm90b2NvbC5Sb29tUGFjay5Vc2VyRGljRW50cnkaTAoMVXNlckRpY0VudHJ5",
+            "EgsKA2tleRgBIAEoCRIrCgV2YWx1ZRgCIAEoCzIcLlNvY2tldEdhbWVQcm90",
+            "b2NvbC5Vc2VyUGFjazoCOAEiHAoIVXNlclBhY2sSEAoIdXNlck5hbWUYASAB",
+            "KAkiugEKClBsYXllclBhY2sSEgoKcGxheWVyTmFtZRgBIAEoCRIwCglpbnB1",
+            "dFBhY2sYAiABKAsyHS5Tb2NrZXRHYW1lUHJvdG9jb2wuSW5wdXRQYWNrEjgK",
+            "DXRyYW5zZm9ybVBhY2sYAyABKAsyIS5Tb2NrZXRHYW1lUHJvdG9jb2wuVHJh",
+            "bnNmb3JtUGFjaxIsCgdoaXRQYWNrGAQgASgLMhsuU29ja2V0R2FtZVByb3Rv",
+            "Y29sLkhpdFBhY2siGQoHSGl0UGFjaxIOCgZkYW1hZ2UYASABKAIicQoJSW5w",
+            "dXRQYWNrEg4KBmlucHV0WBgBIAEoAhIOCgZpbnB1dFkYAiABKAISDgoGbW91",
+            "c2VYGAMgASgCEg4KBm1vdXNlWRgEIAEoAhIUCgxyb3RhdGVBbmdsZVkYBSAB",
+            "KAISDgoGaXNGaXJlGAYgASgIIkYKDVRyYW5zZm9ybVBhY2sSCQoBeBgBIAEo",
+            "AhIJCgF5GAIgASgCEgkKAXoYAyABKAISFAoMcm90YXRlQW5nbGVZGAQgASgC",
+            "KkcKC1JlcXVlc3RDb2RlEg8KC1JlcXVlc3ROb25lEAASCAoEVXNlchABEgkK",
+            "BUhlYXJ0EAISCAoEUm9vbRADEggKBEdhbWUQBCrCAQoKQWN0aW9uQ29kZRIO",
+            "CgpBY3Rpb25Ob25lEAASDAoIUmVnaXN0ZXIQARIJCgVMb2dpbhACEg4KCkNy",
+            "ZWF0ZVJvb20QAxIPCgtGaW5kQWxsUm9vbRAEEgwKCEZpbmRSb29tEAUSDgoK",
+            "RGVsZXRlUm9vbRAGEgsKB0FkZFJvb20QBxIMCghFeGl0Um9vbRAIEg0KCUJl",
+            "Z2luR2FtZRAJEg8KC1BsYXllcklucHV0EAoSCAoERmlyZRALEgcKA0hpdBAM",
+            "KjMKClJldHVybkNvZGUSDgoKUmV0dXJuTm9kZRAAEgsKB1N1Y2NlZWQQARII",
+            "CgRGYWlsEAJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::SocketGameProtocol.RequestCode), typeof(global::SocketGameProtocol.ActionCode), typeof(global::SocketGameProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.MainPack), global::SocketGameProtocol.MainPack.Parser, new[]{ "RequestCode", "ActionCode", "ReturnCode", "LoginPack", "RoomPackList", "PlayerDic" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.MainPack), global::SocketGameProtocol.MainPack.Parser, new[]{ "RequestCode", "ActionCode", "ReturnCode", "LoginPack", "RoomPackList", "PlayerDic", "OriTransformPack" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.LoginPack), global::SocketGameProtocol.LoginPack.Parser, new[]{ "UserName", "Password" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.RoomPack), global::SocketGameProtocol.RoomPack.Parser, new[]{ "NowManNum", "MaxManNum", "RoomName", "UserDic" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.UserPack), global::SocketGameProtocol.UserPack.Parser, new[]{ "UserName" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.PlayerPack), global::SocketGameProtocol.PlayerPack.Parser, new[]{ "PlayerName", "InputPack" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.InputPack), global::SocketGameProtocol.InputPack.Parser, new[]{ "InputX", "InputY", "MouseX", "MouseY" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.PlayerPack), global::SocketGameProtocol.PlayerPack.Parser, new[]{ "PlayerName", "InputPack", "TransformPack", "HitPack" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.HitPack), global::SocketGameProtocol.HitPack.Parser, new[]{ "Damage" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.InputPack), global::SocketGameProtocol.InputPack.Parser, new[]{ "InputX", "InputY", "MouseX", "MouseY", "RotateAngleY", "IsFire" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.TransformPack), global::SocketGameProtocol.TransformPack.Parser, new[]{ "X", "Y", "Z", "RotateAngleY" }, null, null, null, null)
           }));
     }
     #endregion
@@ -135,6 +144,14 @@ namespace SocketGameProtocol {
     ///输入
     /// </summary>
     [pbr::OriginalName("PlayerInput")] PlayerInput = 10,
+    /// <summary>
+    ///开火
+    /// </summary>
+    [pbr::OriginalName("Fire")] Fire = 11,
+    /// <summary>
+    ///受伤
+    /// </summary>
+    [pbr::OriginalName("Hit")] Hit = 12,
   }
 
   /// <summary>
@@ -198,6 +215,7 @@ namespace SocketGameProtocol {
       loginPack_ = other.loginPack_ != null ? other.loginPack_.Clone() : null;
       roomPackList_ = other.roomPackList_.Clone();
       playerDic_ = other.playerDic_.Clone();
+      oriTransformPack_ = other.oriTransformPack_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -295,6 +313,20 @@ namespace SocketGameProtocol {
       get { return playerDic_; }
     }
 
+    /// <summary>Field number for the "oriTransformPack" field.</summary>
+    public const int OriTransformPackFieldNumber = 7;
+    private static readonly pb::FieldCodec<global::SocketGameProtocol.TransformPack> _repeated_oriTransformPack_codec
+        = pb::FieldCodec.ForMessage(58, global::SocketGameProtocol.TransformPack.Parser);
+    private readonly pbc::RepeatedField<global::SocketGameProtocol.TransformPack> oriTransformPack_ = new pbc::RepeatedField<global::SocketGameProtocol.TransformPack>();
+    /// <summary>
+    ///初始化位置包
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::SocketGameProtocol.TransformPack> OriTransformPack {
+      get { return oriTransformPack_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -316,6 +348,7 @@ namespace SocketGameProtocol {
       if (!object.Equals(LoginPack, other.LoginPack)) return false;
       if(!roomPackList_.Equals(other.roomPackList_)) return false;
       if (!PlayerDic.Equals(other.PlayerDic)) return false;
+      if(!oriTransformPack_.Equals(other.oriTransformPack_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -329,6 +362,7 @@ namespace SocketGameProtocol {
       if (loginPack_ != null) hash ^= LoginPack.GetHashCode();
       hash ^= roomPackList_.GetHashCode();
       hash ^= PlayerDic.GetHashCode();
+      hash ^= oriTransformPack_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -365,6 +399,7 @@ namespace SocketGameProtocol {
       }
       roomPackList_.WriteTo(output, _repeated_roomPackList_codec);
       playerDic_.WriteTo(output, _map_playerDic_codec);
+      oriTransformPack_.WriteTo(output, _repeated_oriTransformPack_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -393,6 +428,7 @@ namespace SocketGameProtocol {
       }
       roomPackList_.WriteTo(ref output, _repeated_roomPackList_codec);
       playerDic_.WriteTo(ref output, _map_playerDic_codec);
+      oriTransformPack_.WriteTo(ref output, _repeated_oriTransformPack_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -417,6 +453,7 @@ namespace SocketGameProtocol {
       }
       size += roomPackList_.CalculateSize(_repeated_roomPackList_codec);
       size += playerDic_.CalculateSize(_map_playerDic_codec);
+      size += oriTransformPack_.CalculateSize(_repeated_oriTransformPack_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -446,6 +483,7 @@ namespace SocketGameProtocol {
       }
       roomPackList_.Add(other.roomPackList_);
       playerDic_.Add(other.playerDic_);
+      oriTransformPack_.Add(other.oriTransformPack_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -488,6 +526,10 @@ namespace SocketGameProtocol {
             playerDic_.AddEntriesFrom(input, _map_playerDic_codec);
             break;
           }
+          case 58: {
+            oriTransformPack_.AddEntriesFrom(input, _repeated_oriTransformPack_codec);
+            break;
+          }
         }
       }
     #endif
@@ -528,6 +570,10 @@ namespace SocketGameProtocol {
           }
           case 50: {
             playerDic_.AddEntriesFrom(ref input, _map_playerDic_codec);
+            break;
+          }
+          case 58: {
+            oriTransformPack_.AddEntriesFrom(ref input, _repeated_oriTransformPack_codec);
             break;
           }
         }
@@ -1310,6 +1356,8 @@ namespace SocketGameProtocol {
     public PlayerPack(PlayerPack other) : this() {
       playerName_ = other.playerName_;
       inputPack_ = other.inputPack_ != null ? other.inputPack_.Clone() : null;
+      transformPack_ = other.transformPack_ != null ? other.transformPack_.Clone() : null;
+      hitPack_ = other.hitPack_ != null ? other.hitPack_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1349,6 +1397,36 @@ namespace SocketGameProtocol {
       }
     }
 
+    /// <summary>Field number for the "transformPack" field.</summary>
+    public const int TransformPackFieldNumber = 3;
+    private global::SocketGameProtocol.TransformPack transformPack_;
+    /// <summary>
+    ///玩家的Transform信息包
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::SocketGameProtocol.TransformPack TransformPack {
+      get { return transformPack_; }
+      set {
+        transformPack_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hitPack" field.</summary>
+    public const int HitPackFieldNumber = 4;
+    private global::SocketGameProtocol.HitPack hitPack_;
+    /// <summary>
+    ///伤害包
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::SocketGameProtocol.HitPack HitPack {
+      get { return hitPack_; }
+      set {
+        hitPack_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1366,6 +1444,8 @@ namespace SocketGameProtocol {
       }
       if (PlayerName != other.PlayerName) return false;
       if (!object.Equals(InputPack, other.InputPack)) return false;
+      if (!object.Equals(TransformPack, other.TransformPack)) return false;
+      if (!object.Equals(HitPack, other.HitPack)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1375,6 +1455,8 @@ namespace SocketGameProtocol {
       int hash = 1;
       if (PlayerName.Length != 0) hash ^= PlayerName.GetHashCode();
       if (inputPack_ != null) hash ^= InputPack.GetHashCode();
+      if (transformPack_ != null) hash ^= TransformPack.GetHashCode();
+      if (hitPack_ != null) hash ^= HitPack.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1401,6 +1483,14 @@ namespace SocketGameProtocol {
         output.WriteRawTag(18);
         output.WriteMessage(InputPack);
       }
+      if (transformPack_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(TransformPack);
+      }
+      if (hitPack_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(HitPack);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1419,6 +1509,14 @@ namespace SocketGameProtocol {
         output.WriteRawTag(18);
         output.WriteMessage(InputPack);
       }
+      if (transformPack_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(TransformPack);
+      }
+      if (hitPack_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(HitPack);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1434,6 +1532,12 @@ namespace SocketGameProtocol {
       }
       if (inputPack_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(InputPack);
+      }
+      if (transformPack_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TransformPack);
+      }
+      if (hitPack_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HitPack);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1455,6 +1559,18 @@ namespace SocketGameProtocol {
           InputPack = new global::SocketGameProtocol.InputPack();
         }
         InputPack.MergeFrom(other.InputPack);
+      }
+      if (other.transformPack_ != null) {
+        if (transformPack_ == null) {
+          TransformPack = new global::SocketGameProtocol.TransformPack();
+        }
+        TransformPack.MergeFrom(other.TransformPack);
+      }
+      if (other.hitPack_ != null) {
+        if (hitPack_ == null) {
+          HitPack = new global::SocketGameProtocol.HitPack();
+        }
+        HitPack.MergeFrom(other.HitPack);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1480,6 +1596,20 @@ namespace SocketGameProtocol {
               InputPack = new global::SocketGameProtocol.InputPack();
             }
             input.ReadMessage(InputPack);
+            break;
+          }
+          case 26: {
+            if (transformPack_ == null) {
+              TransformPack = new global::SocketGameProtocol.TransformPack();
+            }
+            input.ReadMessage(TransformPack);
+            break;
+          }
+          case 34: {
+            if (hitPack_ == null) {
+              HitPack = new global::SocketGameProtocol.HitPack();
+            }
+            input.ReadMessage(HitPack);
             break;
           }
         }
@@ -1508,6 +1638,212 @@ namespace SocketGameProtocol {
             input.ReadMessage(InputPack);
             break;
           }
+          case 26: {
+            if (transformPack_ == null) {
+              TransformPack = new global::SocketGameProtocol.TransformPack();
+            }
+            input.ReadMessage(TransformPack);
+            break;
+          }
+          case 34: {
+            if (hitPack_ == null) {
+              HitPack = new global::SocketGameProtocol.HitPack();
+            }
+            input.ReadMessage(HitPack);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  ///伤害包
+  /// </summary>
+  public sealed partial class HitPack : pb::IMessage<HitPack>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<HitPack> _parser = new pb::MessageParser<HitPack>(() => new HitPack());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<HitPack> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::SocketGameProtocol.SocketGameProtocolReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public HitPack() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public HitPack(HitPack other) : this() {
+      damage_ = other.damage_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public HitPack Clone() {
+      return new HitPack(this);
+    }
+
+    /// <summary>Field number for the "damage" field.</summary>
+    public const int DamageFieldNumber = 1;
+    private float damage_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Damage {
+      get { return damage_; }
+      set {
+        damage_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as HitPack);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(HitPack other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Damage, other.Damage)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Damage != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Damage);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Damage != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Damage);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Damage != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Damage);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Damage != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(HitPack other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Damage != 0F) {
+        Damage = other.Damage;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 13: {
+            Damage = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 13: {
+            Damage = input.ReadFloat();
+            break;
+          }
         }
       }
     }
@@ -1532,7 +1868,7 @@ namespace SocketGameProtocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::SocketGameProtocol.SocketGameProtocolReflection.Descriptor.MessageTypes[5]; }
+      get { return global::SocketGameProtocol.SocketGameProtocolReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1556,6 +1892,8 @@ namespace SocketGameProtocol {
       inputY_ = other.inputY_;
       mouseX_ = other.mouseX_;
       mouseY_ = other.mouseY_;
+      rotateAngleY_ = other.rotateAngleY_;
+      isFire_ = other.isFire_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1625,6 +1963,36 @@ namespace SocketGameProtocol {
       }
     }
 
+    /// <summary>Field number for the "rotateAngleY" field.</summary>
+    public const int RotateAngleYFieldNumber = 5;
+    private float rotateAngleY_;
+    /// <summary>
+    ///旋转量
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float RotateAngleY {
+      get { return rotateAngleY_; }
+      set {
+        rotateAngleY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isFire" field.</summary>
+    public const int IsFireFieldNumber = 6;
+    private bool isFire_;
+    /// <summary>
+    ///是否开火
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsFire {
+      get { return isFire_; }
+      set {
+        isFire_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1644,6 +2012,8 @@ namespace SocketGameProtocol {
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(InputY, other.InputY)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(MouseX, other.MouseX)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(MouseY, other.MouseY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(RotateAngleY, other.RotateAngleY)) return false;
+      if (IsFire != other.IsFire) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1655,6 +2025,8 @@ namespace SocketGameProtocol {
       if (InputY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(InputY);
       if (MouseX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(MouseX);
       if (MouseY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(MouseY);
+      if (RotateAngleY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(RotateAngleY);
+      if (IsFire != false) hash ^= IsFire.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1689,6 +2061,14 @@ namespace SocketGameProtocol {
         output.WriteRawTag(37);
         output.WriteFloat(MouseY);
       }
+      if (RotateAngleY != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(RotateAngleY);
+      }
+      if (IsFire != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(IsFire);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1715,6 +2095,14 @@ namespace SocketGameProtocol {
         output.WriteRawTag(37);
         output.WriteFloat(MouseY);
       }
+      if (RotateAngleY != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(RotateAngleY);
+      }
+      if (IsFire != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(IsFire);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1736,6 +2124,12 @@ namespace SocketGameProtocol {
       }
       if (MouseY != 0F) {
         size += 1 + 4;
+      }
+      if (RotateAngleY != 0F) {
+        size += 1 + 4;
+      }
+      if (IsFire != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1760,6 +2154,12 @@ namespace SocketGameProtocol {
       }
       if (other.MouseY != 0F) {
         MouseY = other.MouseY;
+      }
+      if (other.RotateAngleY != 0F) {
+        RotateAngleY = other.RotateAngleY;
+      }
+      if (other.IsFire != false) {
+        IsFire = other.IsFire;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1792,6 +2192,14 @@ namespace SocketGameProtocol {
             MouseY = input.ReadFloat();
             break;
           }
+          case 45: {
+            RotateAngleY = input.ReadFloat();
+            break;
+          }
+          case 48: {
+            IsFire = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -1821,6 +2229,329 @@ namespace SocketGameProtocol {
           }
           case 37: {
             MouseY = input.ReadFloat();
+            break;
+          }
+          case 45: {
+            RotateAngleY = input.ReadFloat();
+            break;
+          }
+          case 48: {
+            IsFire = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  ///玩家的Transform信息包
+  /// </summary>
+  public sealed partial class TransformPack : pb::IMessage<TransformPack>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TransformPack> _parser = new pb::MessageParser<TransformPack>(() => new TransformPack());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<TransformPack> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::SocketGameProtocol.SocketGameProtocolReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TransformPack() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TransformPack(TransformPack other) : this() {
+      x_ = other.x_;
+      y_ = other.y_;
+      z_ = other.z_;
+      rotateAngleY_ = other.rotateAngleY_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TransformPack Clone() {
+      return new TransformPack(this);
+    }
+
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 1;
+    private float x_;
+    /// <summary>
+    ///position x
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float X {
+      get { return x_; }
+      set {
+        x_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 2;
+    private float y_;
+    /// <summary>
+    ///position y
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Y {
+      get { return y_; }
+      set {
+        y_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "z" field.</summary>
+    public const int ZFieldNumber = 3;
+    private float z_;
+    /// <summary>
+    ///position z
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Z {
+      get { return z_; }
+      set {
+        z_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "rotateAngleY" field.</summary>
+    public const int RotateAngleYFieldNumber = 4;
+    private float rotateAngleY_;
+    /// <summary>
+    ///旋转量
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float RotateAngleY {
+      get { return rotateAngleY_; }
+      set {
+        rotateAngleY_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as TransformPack);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(TransformPack other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(RotateAngleY, other.RotateAngleY)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
+      if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
+      if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
+      if (RotateAngleY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(RotateAngleY);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (X != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(X);
+      }
+      if (Y != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Y);
+      }
+      if (Z != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Z);
+      }
+      if (RotateAngleY != 0F) {
+        output.WriteRawTag(37);
+        output.WriteFloat(RotateAngleY);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (X != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(X);
+      }
+      if (Y != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Y);
+      }
+      if (Z != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Z);
+      }
+      if (RotateAngleY != 0F) {
+        output.WriteRawTag(37);
+        output.WriteFloat(RotateAngleY);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (X != 0F) {
+        size += 1 + 4;
+      }
+      if (Y != 0F) {
+        size += 1 + 4;
+      }
+      if (Z != 0F) {
+        size += 1 + 4;
+      }
+      if (RotateAngleY != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(TransformPack other) {
+      if (other == null) {
+        return;
+      }
+      if (other.X != 0F) {
+        X = other.X;
+      }
+      if (other.Y != 0F) {
+        Y = other.Y;
+      }
+      if (other.Z != 0F) {
+        Z = other.Z;
+      }
+      if (other.RotateAngleY != 0F) {
+        RotateAngleY = other.RotateAngleY;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 13: {
+            X = input.ReadFloat();
+            break;
+          }
+          case 21: {
+            Y = input.ReadFloat();
+            break;
+          }
+          case 29: {
+            Z = input.ReadFloat();
+            break;
+          }
+          case 37: {
+            RotateAngleY = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 13: {
+            X = input.ReadFloat();
+            break;
+          }
+          case 21: {
+            Y = input.ReadFloat();
+            break;
+          }
+          case 29: {
+            Z = input.ReadFloat();
+            break;
+          }
+          case 37: {
+            RotateAngleY = input.ReadFloat();
             break;
           }
         }

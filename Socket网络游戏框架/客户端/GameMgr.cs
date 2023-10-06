@@ -18,8 +18,6 @@ internal class GameMgr : BaseMgr<GameMgr>
     //玩家生成的位置
     private GameObject playersFather;
 
-   
-
 
     /// <summary>
     /// 生成角色
@@ -74,7 +72,10 @@ internal class GameMgr : BaseMgr<GameMgr>
         //加载摄像机
         ResMgr.Instance.Load<GameObject>("PlayerCamera");
 
+        //绑定网路事件
         ClientMgr.Instance.BindResponse(ActionCode.PlayerInput, HandleInput);
+        ClientMgr.Instance.BindResponse(ActionCode.Fire, HandFire);
+        ClientMgr.Instance.BindResponse(ActionCode.Hit, HandleHit);
     }
 
     /// <summary>
@@ -91,4 +92,35 @@ internal class GameMgr : BaseMgr<GameMgr>
             }
         }
     }
+
+    /// <summary>
+    /// 处理开火
+    /// </summary>
+    /// <param name="pack"></param>
+    public void HandFire(MainPack pack)
+    {
+        foreach (PlayerPack playerPack in pack.PlayerDic.Values)
+        {
+            if (playerDic.ContainsKey(playerPack.PlayerName))
+            {
+                playerDic[playerPack.PlayerName].HandleFire(playerPack.InputPack);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 处理受伤
+    /// </summary>
+    /// <param name="pack"></param>
+    public void HandleHit(MainPack pack)
+    {
+        foreach (PlayerPack playerPack in pack.PlayerDic.Values)
+        {
+            if (playerDic.ContainsKey(playerPack.PlayerName))
+            {
+                playerDic[playerPack.PlayerName].HandleHit(playerPack.HitPack);
+            }
+        }
+    }
+
 }

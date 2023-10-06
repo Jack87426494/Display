@@ -3,69 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour,INetPlayer
+public class PlayerController : BasePlayerController
 {
-    [Header("人物移动速度")]
-    public float moveSpeed = 3f;
-
-    [Header("人物旋转速度")]
-    public float rotationSpeed = 2.0f;
-
-    private Animator animator;
-
     private InputRequest inputRequest;
+
+    private FireRequest fireRequest;
+
+    private HitRequest hitRequest;
+
+    private PlayerCamera playerCamera;
+
 
     private void Awake()
     {
-        inputRequest = new InputRequest(gameObject.name, 0, 0, 0);
+        inputRequest = new InputRequest(gameObject.name);
+        fireRequest = new FireRequest(gameObject.name);
+        hitRequest = new HitRequest(gameObject.name);
     }
 
-    private void Start()
+    protected override void Start()
     {
-        animator = GetComponent<Animator>();
-        
+        base.Start();
+        playerCamera = Camera.main.GetComponent<PlayerCamera>();
+       
     }
-
-    //获取键盘ad
-    private float inputX;
-    //获取键盘ws
-    private float inputY;
-    // 获取鼠标水平移动
-    private float mouseX;
-
-    //是否奔跑
-    private bool isRun;
-
 
     private void Update()
     {
+        SendFire();
         SendInput();
-        Move();
     }
-
-    private void Move()
+    private void LateUpdate()
     {
-
-        if (inputX != 0 || inputY != 0)
-        {
-            if (isRun == false)
-            {
-                animator.SetBool("isRun", true);
-                isRun = true;
-            }
-        }
-        else if (isRun == true)
-        {
-            animator.SetBool("isRun", false);
-            isRun = false;
-        }
-
-        if (isRun == true)
-        {
-            animator.SetFloat("inputX", inputX);
-            animator.SetFloat("inputY", inputY);
-            transform.Translate((Vector3.forward * inputY + Vector3.right * inputX) * moveSpeed * Time.deltaTime);
-        }
+        Shoot();
+        Move();
     }
 
     /// <summary>
@@ -77,7 +48,7 @@ public class PlayerController : MonoBehaviour,INetPlayer
         inputRequest.inputY = Input.GetAxis("Vertical");
         inputRequest.mouseX = Input.GetAxis("Mouse X");
 
-        if(inputRequest.inputX!=inputX||
+        if (inputRequest.inputX!=inputX||
             inputRequest.inputY!=inputY||
             inputRequest.mouseX!=mouseX)
         {
@@ -85,17 +56,62 @@ public class PlayerController : MonoBehaviour,INetPlayer
         }
     }
 
-    /// <summary>
-    /// 处理远端键盘输入
-    /// </summary>
-    /// <param name="inputPack"></param>
-    public void HandleInput(InputPack inputPack)
+    private void SendFire()
     {
-        inputX = inputPack.InputX;
-        inputY = inputPack.InputY;
-        mouseX = inputPack.MouseX;
-
-        // 在Y轴上旋转
-        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
+        if (Input.GetMouseButtonDown(0))
+        {
+            //服务端同步
+            fireRequest.isFire = true;
+            if(fireRequest.isFire!=isFire)
+            {
+                ClientMgr.Instance.SendRequest(fireRequest);
+            }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            //服务端同步
+            fireRequest.isFire = false;
+            if (fireRequest.isFire != isFire)
+            {
+                ClientMgr.Instance.SendRequest(fireRequest);
+            }
+        }
     }
+
+
+    private void SendHit(float hitDamage)
+    {
+        if(hitDamage>0)
+        {
+            hitRequest.hitDamage = hitDamage;
+            Debug.Log(gameObject.name + "受到"+hitDamage+ "点伤害");
+            ClientMgr.Instance.SendRequest(hitRequest);
+        }
+    }
+
+    Bullet bullet;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("bullet"))
+        {
+            bullet = other.gameObject.GetComponent<Bullet>();
+            SendHit(bullet.damage);
+            bullet.DestroyBullet();
+        }
+    }
+
+    protected override void Move()
+    {
+        base.Move();
+        playerCamera.MoveCamera();
+    }
+
+    public override void HandleInput(InputPack inputPack)
+    {
+        base.HandleInput(inputPack);
+        playerCamera.RotateCamera();
+    }
+
+    
 }

@@ -4,8 +4,6 @@ using System.Collections;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -34,7 +32,8 @@ public class ClientMgr : BaseMgr<ClientMgr>
 
     private IPEndPoint iPEndPoint;
     private EndPoint endPoint;
-    
+
+    int len;
 
     public ClientMgr()
     {
@@ -76,8 +75,21 @@ public class ClientMgr : BaseMgr<ClientMgr>
 
     private void StartReceiveMessage()
     {
-        clientSocket.BeginReceive(messageHandle.Buffer, messageHandle.WaitReadLength, messageHandle.Remsize, 
-            SocketFlags.None, EndAsyncCallback, null);
+        try
+        {
+            if (clientSocket == null || clientSocket.Connected == false)
+            {
+
+                return;
+            }
+
+            clientSocket.BeginReceive(messageHandle.Buffer,
+                messageHandle.WaitReadLength, messageHandle.Remsize, SocketFlags.None, EndAsyncCallback, null);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("接受消息出错:" + e.Message);
+        }
     }
 
     private void EndAsyncCallback(IAsyncResult ar)
@@ -88,7 +100,7 @@ public class ClientMgr : BaseMgr<ClientMgr>
             {
                 return;
             }
-            int len = clientSocket.EndReceive(ar);
+            len = clientSocket.EndReceive(ar);
             messageHandle.ReadBuffer(len, HandleMsg);
             StartReceiveMessage();
         }
@@ -103,7 +115,7 @@ public class ClientMgr : BaseMgr<ClientMgr>
         udpSocket.BeginReceive(udpBuffer, 0, udpBuffer.Length, SocketFlags.None, UdpEndAsyncCallback, null);
     }
 
-    int len;
+    
 
     private void UdpEndAsyncCallback(IAsyncResult ar)
     {
@@ -196,7 +208,7 @@ public class ClientMgr : BaseMgr<ClientMgr>
     /// <param name="pack"></param>
     public void Send(MainPack pack)
     {
-        clientSocket.Send(messageHandle.PackData(pack));
+        clientSocket.Send(MessageHandle.PackData(pack));
     }
 
     /// <summary>
@@ -205,7 +217,7 @@ public class ClientMgr : BaseMgr<ClientMgr>
     /// <param name="pack"></param>
     public void UdpSend(MainPack pack)
     {
-        udpSocket.SendTo(messageHandle.PackData(pack),endPoint);
+        udpSocket.SendTo(MessageHandle.PackData(pack),endPoint);
     }
 
     /// <summary>

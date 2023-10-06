@@ -35,7 +35,7 @@ namespace Server.MessageHander
                 //反射执行方法(也可以根据字符串写swich)
                 string methodName = pack.ActionCode.ToString();
                 MethodInfo methodInfo=hander.GetType().GetMethod(methodName);
-                Console.WriteLine(methodName);
+                //Console.WriteLine(methodName);
                 if(methodInfo==null)
                 {
                     Console.WriteLine("未找到对应方法"+pack.ActionCode.ToString()); 

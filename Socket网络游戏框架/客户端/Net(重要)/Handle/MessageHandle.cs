@@ -55,22 +55,24 @@ internal class MessageHandle
     public void ReadBuffer(int len, Action<MainPack> callBack)
     {
         waitReadLength += len;
-        if (waitReadLength <= 4)
-        {
-            return;
-        }
-        int count = BitConverter.ToInt32(buffer, 0);
+        int count;
 
         //黏包
         while (true)
         {
+            if (waitReadLength <= 4)
+            {
+                return;
+            }
+            count = BitConverter.ToInt32(buffer, 0);
+
             if (waitReadLength >= (count + 4))
             {
                 //解析消息
                 MainPack pack = (MainPack)MainPack.Descriptor.Parser.ParseFrom(buffer, 4, count);
                 callBack?.Invoke(pack);
 
-                //将前面count+4开始的字节数组搬运到0位置长度为剩余长度的位置(分包)
+                //将前count+4开始的字节数组搬运到0位置长度为剩余长度的位置(分包)
                 Array.Copy(buffer, count + 4, buffer, 0, waitReadLength - count - 4);
                 waitReadLength -= (count + 4);
             }
@@ -86,7 +88,7 @@ internal class MessageHandle
     /// </summary>
     /// <param name="pack"></param>
     /// <returns></returns>
-    public byte[] PackData(MainPack pack)
+    public static byte[] PackData(MainPack pack)
     {
         byte[] data = pack.ToByteArray();
         byte[] head = BitConverter.GetBytes(data.Length);

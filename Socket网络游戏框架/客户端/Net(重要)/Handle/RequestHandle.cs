@@ -13,8 +13,11 @@ public class RequestHandle
     //响应字典
     public Dictionary<ActionCode, BaseRequest> responseDic = new Dictionary<ActionCode, BaseRequest>();
     
-    //响应执行列表
-    private List<Action> callBackActionList=new List<Action>(); 
+    ////响应执行列表
+    //private List<Action> callBackActionList=new List<Action>();
+
+    UnityAction unityAction;
+
     public RequestHandle()
     {
         MonoMgr.Instance.AddFixedUpdateAction(RequestUpdate);
@@ -24,6 +27,8 @@ public class RequestHandle
         responseDic.Add(ActionCode.ExitRoom, new ExitRoomRequest());
         responseDic.Add(ActionCode.BeginGame, new BeginGameRequest());
         responseDic.Add(ActionCode.PlayerInput, new InputRequest());
+        responseDic.Add(ActionCode.Fire, new FireRequest());
+        responseDic.Add(ActionCode.Hit, new HitRequest());
     }
 
     /// <summary>
@@ -33,21 +38,20 @@ public class RequestHandle
     {
         try
         {
-            lock (callBackActionList)
-            {
-                if (callBackActionList.Count > 0)
-                {
-                    foreach (Action action in callBackActionList)
-                    {
-                        action?.Invoke();
-                    }
-                    callBackActionList.Clear();
-                }
-            }
+            //if (callBackActionList.Count > 0)
+            //{
+            //    foreach (Action action in callBackActionList)
+            //    {
+            //        action?.Invoke();
+            //    }
+            //    callBackActionList.Clear();
+            //}
+            unityAction?.Invoke();
+            unityAction = null;
         }
-        catch
+        catch(Exception e)
         {
-
+            Debug.Log("执行请求出错" + e.Message);
         }
        
         
@@ -59,12 +63,13 @@ public class RequestHandle
     /// <param name="pack"></param>
     public void HandleRequest(MainPack pack)
     {
-        if (responseDic.TryGetValue(pack.ActionCode, out BaseRequest requst))
+        if (responseDic.TryGetValue(pack.ActionCode, out BaseRequest request))
         {
-            callBackActionList.Add(() =>
-            {
-                requst.OnResponse(pack);
-            });
+            unityAction +=()=> { request.OnResponse(pack); };
+            //callBackActionList.Add(() =>
+            //{
+            //    request.OnResponse(pack);
+            //});
         }
         else
         {
@@ -79,9 +84,9 @@ public class RequestHandle
     /// <param name="responseAction"></param>
     public void BindResponse(ActionCode actionCode, UnityAction<MainPack> responseAction)
     {
-        if (responseDic.TryGetValue(actionCode, out BaseRequest requst))
+        if (responseDic.TryGetValue(actionCode, out BaseRequest request))
         {
-            requst.responseAction += responseAction;
+            request.responseAction += responseAction;
         }
         else
         {

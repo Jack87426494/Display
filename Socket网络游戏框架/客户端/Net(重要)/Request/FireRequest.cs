@@ -3,31 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputRequest : BaseRequest
+public class FireRequest : BaseRequest
 {
     private string playerName;
-    public float inputX;
-    public float inputY;
-    public float mouseX;
-    public float rotateAngleY;
-    public bool isFire;
+    public bool isFire=false;
 
-    public InputRequest()
+    public FireRequest(string playerName="", bool isFire=false)
     {
         requestCode = RequestCode.Game;
-        actionCode = ActionCode.PlayerInput;
-    }
-
-    public InputRequest(string playerName = "", float inputX = 0, float inputY = 0, float mouseX = 0,
-        float rotateAngleY=0)
-    {
-        requestCode = RequestCode.Game;
-        actionCode = ActionCode.PlayerInput;
+        actionCode = ActionCode.Fire;
         this.playerName = playerName;
-        this.inputX = inputX;
-        this.inputY = inputY;
-        this.mouseX = mouseX;
-        this.rotateAngleY = rotateAngleY;
+        this.isFire = isFire;
     }
 
     public override MainPack GetPack()
@@ -40,13 +26,10 @@ public class InputRequest : BaseRequest
         playerPack.PlayerName = playerName;
 
         InputPack inputPack = new InputPack();
-        inputPack.InputX = inputX;
-        inputPack.InputY = inputY;
-        inputPack.MouseX = mouseX;
-        inputPack.RotateAngleY = rotateAngleY;
+        inputPack.IsFire = isFire;
 
         playerPack.InputPack = inputPack;
-        pack.PlayerDic.Add(playerPack.PlayerName,playerPack);
+        pack.PlayerDic.Add(playerPack.PlayerName, playerPack);
 
         //设置房间名
         RoomPack roomPack = new RoomPack();
@@ -63,13 +46,11 @@ public class InputRequest : BaseRequest
         switch (pack.ReturnCode)
         {
             case ReturnCode.Succeed:
-                //Debug.Log("input同步成功");
-                
+
                 break;
             case ReturnCode.Fail:
-                Debug.Log("input同步失败");
+                Debug.Log("开火同步失败");
                 break;
         }
     }
-       
 }

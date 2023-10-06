@@ -32,18 +32,54 @@ namespace Server.MessageHander
                 }
                 userClient.Send(pack);
             }
+               
             return pack;
-            //if (pack.PlayerDic.ContainsKey(client.GetUserData.userName))
-            //{
-            //    pack.ReturnCode = ReturnCode.Succeed;
-            //    return pack;
-            //}
-            //else
-            //{
-            //    pack.ReturnCode = ReturnCode.Fail;
-            //    return pack;
-            //}
-           
+        }
+
+        /// <summary>
+        /// 开火
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="client"></param>
+        /// <param name="pack"></param>
+        /// <returns></returns>
+        public MainPack Fire(Server server, Client client, MainPack pack)
+        {
+            pack.ReturnCode = ReturnCode.Succeed;
+            //开始广播
+            foreach (Client userClient in server.roomDic[pack.RoomPackList[0].RoomName].GetPlayers.Values)
+            {
+                if (userClient == client)
+                {
+                    continue;
+                }
+                userClient.Send(pack);
+            }
+
+            return pack;
+        }
+
+        /// <summary>
+        /// 受伤
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="client"></param>
+        /// <param name="pack"></param>
+        /// <returns></returns>
+        public MainPack Hit(Server server, Client client, MainPack pack)
+        {
+            pack.ReturnCode = ReturnCode.Succeed;
+            //开始广播
+            foreach (Client userClient in server.roomDic[pack.RoomPackList[0].RoomName].GetPlayers.Values)
+            {
+                if (userClient == client)
+                {
+                    continue;
+                }
+                userClient.Send(pack);
+            }
+
+            return pack;
         }
     }
 }

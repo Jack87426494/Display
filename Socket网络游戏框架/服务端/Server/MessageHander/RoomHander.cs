@@ -11,8 +11,7 @@ namespace Server.MessageHander
 {
     internal class RoomHander:BaseHander
     {
-        //房间字典
-        public Dictionary<string, RoomData> roomDic = new Dictionary<string, RoomData>();
+        
 
         public RoomHander()
         {
@@ -37,9 +36,9 @@ namespace Server.MessageHander
 
             foreach (RoomPack roomPack in pack.RoomPackList)
             {
-                if (!roomDic.ContainsKey(roomPack.RoomName))
+                if (!server.roomDic.ContainsKey(roomPack.RoomName))
                 {
-                    roomDic.Add(roomPack.RoomName, new RoomData(roomPack.RoomName, roomPack.NowManNum, roomPack.MaxManNum, client));
+                    server.roomDic.Add(roomPack.RoomName, new RoomData(roomPack.RoomName, roomPack.NowManNum, roomPack.MaxManNum, client));
                     pack.ReturnCode = ReturnCode.Succeed;
                     //广播给其它剩余的客户端
                     foreach (Client otherClient in server.clientList)
@@ -67,10 +66,10 @@ namespace Server.MessageHander
         /// <returns></returns>
         public MainPack FindAllRoom(Server server, Client client, MainPack pack)
         {
-            if (roomDic!=null)
+            if (server.roomDic !=null)
             {
                 pack.RoomPackList.Clear();
-                foreach (RoomData roomData in roomDic.Values)
+                foreach (RoomData roomData in server.roomDic.Values)
                 {
                     RoomPack roomPack = new RoomPack();
                     roomPack.RoomName = roomData.roomName;
@@ -99,11 +98,11 @@ namespace Server.MessageHander
         {
             foreach (RoomPack roomPack in pack.RoomPackList)
             {
-                if (roomDic.ContainsKey(roomPack.RoomName))
+                if (server.roomDic.ContainsKey(roomPack.RoomName))
                 {
                     pack.ReturnCode = ReturnCode.Succeed;
-                    pack.RoomPackList[0].NowManNum = roomDic[roomPack.RoomName].nowManNum;
-                    pack.RoomPackList[0].MaxManNum = roomDic[roomPack.RoomName].maxManNum;
+                    pack.RoomPackList[0].NowManNum = server.roomDic[roomPack.RoomName].nowManNum;
+                    pack.RoomPackList[0].MaxManNum = server.roomDic[roomPack.RoomName].maxManNum;
                     return pack;
                 }
             }
@@ -121,7 +120,7 @@ namespace Server.MessageHander
         /// <returns></returns>
         public MainPack DeleteRoom(Server server, Client client, MainPack pack)
         {
-            if(roomDic.Count<=0)
+            if(server.roomDic.Count<=0)
             {
                 pack.ReturnCode = ReturnCode.Fail;
                 return pack;
@@ -129,11 +128,11 @@ namespace Server.MessageHander
 
             foreach(RoomPack roomPack in pack.RoomPackList)
             {
-                if (roomDic.ContainsKey(roomPack.RoomName))
+                if (server.roomDic.ContainsKey(roomPack.RoomName))
                 {
-                    if (client == roomDic[roomPack.RoomName].GetHost)
+                    if (client == server.roomDic[roomPack.RoomName].GetHost)
                     {
-                        roomDic.Remove(roomPack.RoomName);
+                        server.roomDic.Remove(roomPack.RoomName);
                         pack.ReturnCode = ReturnCode.Succeed;
 
                         //广播给其它剩余的客户端
@@ -163,9 +162,9 @@ namespace Server.MessageHander
         /// <returns></returns>
         public MainPack AddRoom(Server server, Client client, MainPack pack)
         {
-            if (roomDic.ContainsKey(pack.RoomPackList[0].RoomName))
+            if (server.roomDic.ContainsKey(pack.RoomPackList[0].RoomName))
             {
-                RoomData roomData = roomDic[pack.RoomPackList[0].RoomName];
+                RoomData roomData = server.roomDic[pack.RoomPackList[0].RoomName];
 
                 if(roomData.AddPlayer(client)==false)
                 {
@@ -210,17 +209,17 @@ namespace Server.MessageHander
         /// <returns></returns>
         public MainPack ExitRoom(Server server, Client client, MainPack pack)
         {
-            if (roomDic.ContainsKey(pack.RoomPackList[0].RoomName))
+            if (server.roomDic.ContainsKey(pack.RoomPackList[0].RoomName))
             {
                 pack.ReturnCode = ReturnCode.Succeed;
                
                 foreach (UserPack userPack in pack.RoomPackList[0].UserDic.Values)
                 {
-                    roomDic[pack.RoomPackList[0].RoomName].DeletePlayer(userPack.UserName);
+                    server.roomDic[pack.RoomPackList[0].RoomName].DeletePlayer(userPack.UserName);
                 }
-                pack.RoomPackList[0].NowManNum = roomDic[pack.RoomPackList[0].RoomName].nowManNum;
+                pack.RoomPackList[0].NowManNum = server.roomDic[pack.RoomPackList[0].RoomName].nowManNum;
 
-                RoomData roomData = roomDic[pack.RoomPackList[0].RoomName];
+                RoomData roomData = server.roomDic[pack.RoomPackList[0].RoomName];
                 //广播给房间内其它剩余的客户端
                 foreach (Client otherClient in roomData.GetPlayers.Values)
                 {
@@ -249,20 +248,28 @@ namespace Server.MessageHander
         /// <returns></returns>
         public MainPack BeginGame(Server server, Client client, MainPack pack)
         {
-            if (roomDic.ContainsKey(pack.RoomPackList[0].RoomName)&& 
-                roomDic[pack.RoomPackList[0].RoomName].GetHost == client)
+            if (server.roomDic.ContainsKey(pack.RoomPackList[0].RoomName)&&
+                server.roomDic[pack.RoomPackList[0].RoomName].GetHost == client)
             {
                 //将房间内所有的玩家数据写入包中
-                foreach(Client playerCliet in roomDic[pack.RoomPackList[0].RoomName].GetPlayers.Values)
+                foreach (Client playerCliet in server.roomDic[pack.RoomPackList[0].RoomName].GetPlayers.Values)
                 {
                     PlayerPack playerPack = new PlayerPack();
                     playerPack.PlayerName = playerCliet.GetUserData.userName;
-                    pack.PlayerDic.Add(playerPack.PlayerName,playerPack);
+                    pack.PlayerDic.Add(playerPack.PlayerName, playerPack);
                 }
-                
+
+                //foreach (string hostName in pack.RoomPackList[0].UserDic.Keys)
+                //{
+                //    PlayerPack playerPack = new PlayerPack();
+                //    playerPack.PlayerName = hostName;
+                //    pack.PlayerDic.Add(playerPack.PlayerName, playerPack);
+                //}
+
+
                 pack.ReturnCode = ReturnCode.Succeed;
                 //开始广播
-                foreach (Client userClient in roomDic[pack.RoomPackList[0].RoomName].GetPlayers.Values)
+                foreach (Client userClient in server.roomDic[pack.RoomPackList[0].RoomName].GetPlayers.Values)
                 {
                     if (userClient == client)
                     {
