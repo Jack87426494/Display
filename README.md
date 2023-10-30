@@ -3,6 +3,9 @@
  ****
 __参与过的部分项目__:<br />
 <br/>
+(__奇幻射击__ 3D联网射击游戏，使用Socket自制联机框架)<br/>[https://www.bilibili.com/video/BV1uC4y1Z7gN]<br/>
+2023年8月25日 – 2023年9月15日<br/>
+<br/>
 (__雾隐__ 解谜叙事类型rpg ，担任u3d程序开发,预计年底上线)<br/>[https://www.sohu.com/a/604443841_258858]<br />
 2023年07月 – 2023年09月<br/>
 <br/>
@@ -12,7 +15,7 @@ __参与过的部分项目__:<br />
 (__丧尸围城__   3D射击塔防游戏)<br/>[https://www.bilibili.com/video/BV1yW4y1k7vx]<br/>
 2023年06月 – 2023年07月<br/>
 <br/>
-(__汉字大消除__ 益智消除类游戏项目，担任程序主要开发人员，获得奔腾杯二等奖，Cusga入围。)<br/>[https://www.bilibili.com/video/BV1oA4y1X7Q9]<br/>
+(__汉字大消除__ 益智消除类游戏项目，担任程序主要开发人员，获得奔腾杯二等奖。)<br/>[https://www.bilibili.com/video/BV1oA4y1X7Q9]<br/>
 2022年3月 – 2022年5月<br/>
 <br/>
 ****
